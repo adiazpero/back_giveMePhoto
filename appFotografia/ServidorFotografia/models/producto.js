@@ -10,3 +10,9 @@ const getByCategoria = (pCategoria) => {
             })
     });
 }
+
+
+
+module.exports = {
+    getByCategoria: getByCategoria
+}
