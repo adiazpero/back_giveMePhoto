@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const Producto = require('../../models/producto');
-<<<<<<< HEAD
 
 
 // GET http://localhost:3000/api/productos
@@ -66,18 +65,6 @@ router.get('/tecnica/:tecnica', async (req, res) => {
     res.json(productos)
 })
 
-=======
-
-
-//GET http://localhost:3000/api/productos/:categoria
-router.get('/:categoria', async(req, res) => {
-    const producto = await Producto.getByCategoria(req.params.categoria);
-    res.json(producto)
-    console.log(producto)
-})
-
-
->>>>>>> df3842c9b680a89277ff18dbfe0992b7f1688b21
 
 
 module.exports = router;

@@ -19,7 +19,6 @@ const getByCategoria = (pCategoria) => {
     });
 }
 
-<<<<<<< HEAD
 const getByResolucion = (pResolucionMin, pResolucionMax) => {
     return new Promise((resolve, reject) => {
         db.query('select * from productos where resolucion > ? and resolucion < ?', [pResolucionMin, pResolucionMax], (err, rows) => {
@@ -99,10 +98,4 @@ module.exports = {
     getByPrecio: getByPrecio,
     getByTecnicas: getByTecnicas,
     getByTecnica: getByTecnica
-=======
-
-
-module.exports = {
-    getByCategoria: getByCategoria
->>>>>>> df3842c9b680a89277ff18dbfe0992b7f1688b21
 }
