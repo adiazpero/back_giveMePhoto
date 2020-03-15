@@ -42,13 +42,28 @@ router.get('/iso/:isoMin/:isoMax', async (req, res) => {
 
 
 
-
 //GET http://localhost:3000/api/productos/precio/precioMin/precioMax
-router.get('/precio/:precioMin/:precioMax', async(req, res)=>{
+router.get('/precio/:precioMin/:precioMax', async (req, res) => {
     const productos = await Producto.getByPrecio(req.params.precioMin, req.params.precioMax);
     res.json(productos)
 })
 
+
+
+//GET http://localhost:3000/api/productos/tecnicas/tecnica1/tecnica2   //devuelve null
+router.get('/tecnicas/:tecnica1/:tecnica2', async (req, res) => {
+    console.log(req.params)
+    const productos = await Producto.getByTecnicas(req.params['tecnica1'], req.params['tecnica2']);
+    res.json(productos)
+})
+
+
+//GET http://localhost:3000/api/productos/tecnica/:tecnica  
+router.get('/tecnica/:tecnica', async (req, res) => {
+    console.log(typeof req.params.tecnica)
+    const productos = await Producto.getByTecnica(req.params['tecnica']);
+    res.json(productos)
+})
 
 
 

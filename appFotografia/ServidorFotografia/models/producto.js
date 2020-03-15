@@ -65,6 +65,29 @@ const getByPrecio = (pPrecioMin, pPrecioMax) => {
 }
 
 
+// Ver con profes (la query esta completa en blog.notas)
+const getByTecnicas = (pTecnica1, pTecnica2) => {
+    return new Promise((resolve, reject) => {
+        db.query('select * from productos where ? = 1 and ? = 1', [pTecnica1, pTecnica2], (err, rows) => {
+            if (rows.length === 0) {
+                resolve(null);
+            }
+            resolve(rows);
+        })
+    })
+}
+
+const getByTecnica = (pTecnica) => {
+    return new Promise((resolve, reject) => {
+        db.query('select * from productos where ? = 1', [pTecnica], (err, rows) => {
+            if (rows.length === 0) {
+                resolve(null);
+            }
+            resolve(rows);
+        })
+    })
+}
+
 
 module.exports = {
     getByCategoria: getByCategoria,
@@ -72,5 +95,7 @@ module.exports = {
     getByResolucion: getByResolucion,
     getByFocal: getByFocal,
     getByIso: getByIso,
-    getByPrecio: getByPrecio
+    getByPrecio: getByPrecio,
+    getByTecnicas: getByTecnicas,
+    getByTecnica: getByTecnica
 }
