@@ -7,7 +7,7 @@ const getAll = () => {
     });
 };
 
-
+//marca camara y accesorio
 const getByMarca = (pMarca) => {
     return new Promise((resolve, reject) => {
         db.query('select * from productos where marca = ?', [pMarca], (err, rows) => {
@@ -20,6 +20,7 @@ const getByMarca = (pMarca) => {
     });
 }
 
+//marca camaras y accesorios
 const getByMarcas = (pMarca1, pMarca2) => {
     return new Promise((resolve, reject) => {
         //let query = "poner la query como un string";
