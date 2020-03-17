@@ -33,6 +33,32 @@ const getByMarcas = (pMarca1, pMarca2) => {
     })
 }
 
+//marca por objetivos
+const getByMarcaObjetivos = (pMarca) => {
+    return new Promise((resolve, reject) => {
+        db.query('select * from productos where marca = ? and categoria = "objetivos"', [pMarca], (err, rows) => {
+            if (err) reject(err);
+            if (rows.length === 0) {
+                resolve(null);
+            }
+            resolve(rows);
+        })
+    });
+}
+
+//marcas por objetivos
+const getByMarcasObjetivos = (pMarca1, pMarca2) => {
+    return new Promise((resolve, reject) => {
+        //let query = "poner la query como un string";
+        db.query('select * from productos where marca in (?, ?) AND categoria = "objetivos"', [pMarca1, pMarca2], (err, rows) => {
+            if (err) reject(err);
+            if (rows.length === 0) {
+                resolve(null);
+            }
+            resolve(rows);
+        })
+    })
+}
 
 const getByCategoria = (pCategoria) => {
     return new Promise((resolve, reject) => {
@@ -165,6 +191,8 @@ module.exports = {
     getByTecnica: getByTecnica,
     getByTecnicas: getByTecnicas,
     getByMarca: getByMarca,
-    getByMarcas: getByMarcas
+    getByMarcas: getByMarcas,
+    getByMarcaObjetivos: getByMarcaObjetivos,
+    getByMarcasObjetivos: getByMarcasObjetivos
 
 }

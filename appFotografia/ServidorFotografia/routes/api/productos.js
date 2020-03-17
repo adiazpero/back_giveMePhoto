@@ -8,15 +8,32 @@ router.get('/', async (req, res) => {
     res.json(productos)
 })
 
+//Marcas cámaras y accesorios
+//GET http://localhost:3000/api/productos/marca/marca1 
+router.get('/marca/:marca', async (req, res) => {
+    const productos = await Producto.getByMarca(req.params['marca']);
+    res.json(productos)
+})
+
+
 //GET http://localhost:3000/api/productos/marcas/marca1/marca2 
 router.get('/marcas/:marca1/:marca2', async (req, res) => {
     const productos = await Producto.getByMarcas(req.params['marca1'], req.params['marca2']);
     res.json(productos)
 })
 
-//GET http://localhost:3000/api/productos/marca/marca1 
-router.get('/marca/:marca', async (req, res) => {
-    const productos = await Producto.getByMarca(req.params['marca']);
+
+//Marcas objetivos
+//GET http://localhost:3000/api/productos/marca/objetivos/marca1 
+router.get('/marca/objetivos/:marca', async (req, res) => {
+    const productos = await Producto.getByMarcaObjetivos(req.params['marca']);
+    res.json(productos)
+})
+
+
+//GET http://localhost:3000/api/productos/marcas/objetivos/marca1/marca2 
+router.get('/marcas/objetivos/:marca1/:marca2', async (req, res) => {
+    const productos = await Producto.getByMarcasObjetivos(req.params['marca1'], req.params['marca2']);
     res.json(productos)
 })
 
