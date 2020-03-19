@@ -13,10 +13,10 @@ const emailExist = (pEmail) => {
         db.query('select * from usuarios where email = ?', [pEmail], (err, rows) => {
             if (err) return reject(err);
             if (rows.length === 0) return resolve(null);
-            resolve(rows[0])
+            resolve(rows[0]);
         })
     });
-}
+};
 
 
 module.exports = {
