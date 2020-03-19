@@ -17,7 +17,7 @@ const getByMarca = (pMarca) => {
             }
             resolve(rows);
         })
-    });
+    });no
 }
 
 //marca camaras y accesorios

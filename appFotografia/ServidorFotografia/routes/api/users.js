@@ -15,6 +15,4 @@ router.post('/registro', async(req, res) => {
 
 
 
-
-
 module.exports = router;

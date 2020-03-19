@@ -40,7 +40,6 @@ router.get('/marcas/objetivos/:marca1/:marca2', async (req, res) => {
 
 //GET http://localhost:3000/api/productos/:categoria
 router.get('/:categoria', async (req, res) => {
-    console.log(req.params)
     const productos = await Producto.getByCategoria(req.params['categoria']);
     res.json(productos)
 })
