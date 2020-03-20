@@ -22,7 +22,7 @@ router.post('/registro',
             return (/^(?=.*\d).{4,8}$/).test(value);
         })
     ], */
-    async (req, res) => {
+    async(req, res) => {
         //Vemos el resultado de las validaciones y funciona como middleware
         //const errors = validationResult(req);
         /* if (!errors.isEmpty()) {
@@ -40,7 +40,7 @@ router.post('/registro',
     });
 
 // POST http://localhost:3000/api/users/login
-router.post('/login', async (req, res) => {
+router.post('/login', async(req, res) => {
     console.log('req.body', req.body)
     try {
 
