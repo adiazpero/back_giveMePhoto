@@ -9,10 +9,13 @@ const create = ({ nombre, apellidos, email, password }) => {
 }
 
 const emailExist = (pEmail) => {
+    console.log('emailexist', pEmail)
     return new Promise((resolve, reject) => {
         db.query('select * from usuarios where email = ?', [pEmail], (err, rows) => {
             if (err) return reject(err);
+            console.log('rows', rows)
             if (rows.length === 0) return resolve(null);
+
             resolve(rows[0]);
         })
     });

@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const jwt = require('jwt-simple');
 const { check, validationResult } = require('express-validator');
-const user = require('../../models/user');
+const User = require('../../models/user');
 
 
 /*
@@ -30,7 +30,7 @@ router.post('/registro',
         } */
         const passwordEnc = bcrypt.hashSync(req.body.password, 10);
         req.body.password = passwordEnc;
-        const result = await user.create(req.body);
+        const result = await User.create(req.body);
         res.json(result)
         if (result['affectedRows'] === 1) {
             res.json({ success: 'El cliente se ha creado' });
@@ -41,14 +41,18 @@ router.post('/registro',
 
 // POST http://localhost:3000/api/users/login
 router.post('/login', async (req, res) => {
+    console.log('req.body', req.body)
     try {
-        const User = await user.emailExist(req.body.email);
-        if (!User) {
-            return res.status(401).json({ error: 'Error en email y/o password' });
+
+        const user = await User.emailExist(req.body.email);
+
+        if (!user) {
+            return res.status(401).json({ error: 'Error en el usuario' });
         }
-        const iguales = bcrypt.compareSync(req.body.password, User.password);
+        const iguales = bcrypt.compareSync(req.body.password, user.password);
+        console.log('iguales', iguales)
         if (iguales) {
-            res.json({ success: 'El usuario se ha logado correctamente' }); //createToken(User)
+            res.json({ success: createToken(User) });
         } else {
             res.status(401).json({ error: 'Error en email y/o password' });
         }
