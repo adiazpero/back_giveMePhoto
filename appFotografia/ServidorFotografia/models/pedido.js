@@ -1,32 +1,15 @@
-const getAllPedidosUser = (pId) => {
+const createPedido = ({ direccion, telefono, fechapedido, fk_usuario, fk_producto }) => {
     return new Promise((resolve, reject) => {
-        db.query('select * from pedidos where fk_usuario = ?', [pId], (err, rows) => {
+        db.query('insert into pedidos (direccion, telefono, fechapedido, fk_usuario, fk_producto) values(?,?,?,?,?)', [direccion, telefono, fechapedido, fk_usuario, fk_producto], (err, result) => {
             if (err) reject(err);
-            if (rows.length === 0) {
-                resolve(null);
-            }
-            resolve(rows);
+            resolve(result);
         })
     });
-};
-
-
-const getAllDetallePedidos = (pIdUser) => {
-    return new Promise((resolve, reject) => {
-        db.query('select pedidos.*, group_concat(productos.marca), sum(productos.precio) from pedidos inner join usuarios on usuarios.id = fk_usuario inner join productos on productos.id = fk_producto where usuarios.id = ?', [pIdUser], (err, rows) => {
-            if (err) reject(err);
-            if (rows.length === 0) {
-                resolve(null);
-            }
-            resolve(rows);
-        })
-    })
 }
 
 
 
-module.exports = {
-    getAllPedidosUser: getAllPedidosUser,
-    getAllDetallePedidos: getAllDetallePedidos
 
+module.exports = {
+    createPedido: createPedido
 }
