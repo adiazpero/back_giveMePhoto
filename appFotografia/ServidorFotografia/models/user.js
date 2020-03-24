@@ -21,8 +21,20 @@ const emailExist = (pEmail) => {
     });
 };
 
+const getById = (pId) => {
+    return new Promise((resolve, reject) => {
+        db.query('select * from usuarios where id = ?', [pId], (err, rows) => {
+            if (err) reject(err);
+            if (rows.length === 0) {
+                resolve(null);
+            }
+            resolve(rows);
+        })
+    });
+}
 
 module.exports = {
     create: create,
-    emailExist: emailExist
+    emailExist: emailExist,
+    getById: getById
 }

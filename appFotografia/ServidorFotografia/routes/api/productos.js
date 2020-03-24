@@ -76,19 +76,18 @@ router.get('/precio/:precioMin/:precioMax', async (req, res) => {
 })
 
 
-//GET http://localhost:3000/api/productos/tecnica/tecnicamacro 
+/* //GET http://localhost:3000/api/productos/tecnica/tecnicamacro 
 router.get('/tecnica/:tecnica', async (req, res) => {
     const productos = await Producto.getByTecnica(req.params['tecnica']);
     res.json(productos)
-})
+}) */
 
 
-//GET http://localhost:3000/api/productos/tecnicas/tecnicanaturaleza/tecnicanocturna/tecnicaretrato/tecnicamacro  
-router.get('/tecnicas/:tecnica1/:tecnica2/:tecnica3/:tecnica4', async (req, res) => {
-    const productos = await Producto.getByTecnicas(req.params['tecnica1'], req.params['tecnica2'], req.params['tecnica3'], req.params['tecnica4']);
+//GET http://localhost:3000/api/productos/tecnicas 
+router.post('/tecnicas', async (req, res) => {
+    const productos = await Producto.getByTecnicas(req.body.tecnicas);
     res.json(productos)
 })
-
 
 
 module.exports = router;

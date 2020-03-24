@@ -17,7 +17,7 @@ const getByMarca = (pMarca) => {
             }
             resolve(rows);
         })
-    });no
+    }); 
 }
 
 //marca camaras y accesorios
@@ -126,9 +126,35 @@ const getByPrecio = (pPrecioMin, pPrecioMax) => {
 }
 
 
-const getByTecnica = (pTecnica) => {
+/* const getByTecnica = (pTecnica) => {
     return new Promise((resolve, reject) => {
         db.query(`select * from productos where ${pTecnica} = 1`, [], (err, rows) => {
+            if (err) reject(err);
+            if (rows.length === 0) {
+                resolve(null);
+            }
+            resolve(rows);
+        })
+    })
+} */
+
+
+const getByTecnicas = (pTecnicas) => {
+    return new Promise((resolve, reject) => {
+        let query = 'select * from productos where ';
+        if (!Array.isArray(pTecnicas)) {
+            query += pTecnicas + ' = 1'
+        } else {
+            for (const key in pTecnicas) {
+                if (key == pTecnicas.length - 1) {
+                    query += pTecnicas[key] + ' = 1'
+                } else {
+                    query += pTecnicas[key] + ' = 1 and ';
+                }
+            }
+        }
+        console.log(query)
+        db.query(query, [], (err, rows) => {
             if (err) reject(err);
             if (rows.length === 0) {
                 resolve(null);
@@ -139,49 +165,6 @@ const getByTecnica = (pTecnica) => {
 }
 
 
-//REVISARLAS 
-const getByTecnicas = (pTecnica1, pTecnica2, pTecnica3, pTecnica4) => {
-    return new Promise((resolve, reject) => {
-        if (pTecnica1 != "") {
-            db.query(`select * from productos where ${pTecnica1} = 1`, [], (err, rows) => {
-                if (err) reject(err);
-                if (rows.length === 0) {
-                    resolve(err);
-                }
-                resolve(rows);
-            })
-        } else if (pTecnica1 != "" && pTecnica2 != "") {
-            db.query(`select * from productos where ${pTecnica1} = 1 and ${pTecnica2} = 1`, [], (err, rows) => {
-                if (err) reject(err);
-                if (rows.length === 0) {
-                    resolve(null);
-                }
-                resolve(rows);
-            })
-        } else if (pTecnica1 != "" && pTecnica2 != "" && pTecnica3 != "") {
-            db.query(`select * from productos where ${pTecnica1} = 1 and ${pTecnica2} = 1 and ${pTecnica3} = 1`, [], (err, rows) => {
-                if (err) reject(err);
-                if (rows.length === 0) {
-                    resolve(null);
-                }
-                resolve(rows);
-            })
-        } else if (pTecnica1 != "" && pTecnica2 != "" && pTecnica3 != "" && pTecnica4 != "") {
-            db.query(`select * from productos where ${pTecnica1} = 1 and ${pTecnica2} = 1 and ${pTecnica3} = 1 and ${pTecnica4} = 1`, [], (err, rows) => {
-                if (err) reject(err);
-                if (rows.length === 0) {
-                    resolve(null);
-                }
-                resolve(rows);
-            })
-        }
-    })
-}
-
-
-
-
-
 module.exports = {
     getByCategoria: getByCategoria,
     getAll: getAll,
@@ -189,7 +172,6 @@ module.exports = {
     getByFocal: getByFocal,
     getByIso: getByIso,
     getByPrecio: getByPrecio,
-    getByTecnica: getByTecnica,
     getByTecnicas: getByTecnicas,
     getByMarca: getByMarca,
     getByMarcas: getByMarcas,
