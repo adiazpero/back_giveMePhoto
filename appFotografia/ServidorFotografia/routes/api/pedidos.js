@@ -10,7 +10,7 @@ router.use(middlewares.checkToken);
 router.post('/carrito', async(req, res) => {
     console.log(req.body)
 
-    const result = await Pedido.createPedido(req.body.telefono, req.body.direccion, req.payload.usuarioId);
+    const result = await Pedido.createPedido(req.body.direccion, req.body.telefono, req.payload.usuarioId);
     console.log(result)
     for (let producto of req.body.productos) {
         console.log(producto)
