@@ -6,8 +6,9 @@ const { check, validationResult } = require('express-validator');
 const User = require('../../models/user');
 
 
+
 //GET http://localhost:3000/api/users/:id
-router.get('/:id', async (req, res) => {
+router.get('/:id', async(req, res) => {
     const usuario = await User.getById(req.params['id']);
     res.json(usuario)
 })
@@ -22,7 +23,7 @@ router.post('/registro',
             return (/^(?=.*\d).{4,8}$/).test(value);
         })
     ], */
-    async (req, res) => {
+    async(req, res) => {
         //Vemos el resultado de las validaciones y funciona como middleware
         //const errors = validationResult(req);
         /* if (!errors.isEmpty()) {
@@ -40,19 +41,16 @@ router.post('/registro',
     });
 
 // POST http://localhost:3000/api/users/login
-router.post('/login', async (req, res) => {
-    console.log('req.body', req.body)
+router.post('/login', async(req, res) => {
     try {
-
         const user = await User.emailExist(req.body.email);
-
         if (!user) {
             return res.status(401).json({ error: 'Error en el usuario' });
         }
         const iguales = bcrypt.compareSync(req.body.password, user.password);
-        console.log('iguales', iguales)
         if (iguales) {
-            res.json({ success: 'El usuario se ha logado correctamente' }); //createToken(User)
+            res.json({ success: createToken(user) });
+
         } else {
             res.status(401).json({ error: 'Error en email y/o password' });
         }
@@ -61,12 +59,15 @@ router.post('/login', async (req, res) => {
     }
 });
 
+
 const createToken = (pUser) => {
+
     const payload = {
         usuarioId: pUser.id,
         fechaCreacion: moment().unix(),
         fechaExpiracion: moment().add(10, 'minutes').unix()
     }
+    console.log(payload)
     return jwt.encode(payload, process.env.SECRET_KEY);
 }
 
