@@ -7,9 +7,11 @@ const User = require('../../models/user');
 
 
 
-//GET http://localhost:3000/api/users/:id
-router.get('/:id', async(req, res) => {
-    const usuario = await User.getById(req.params['id']);
+
+//GET http://localhost:3000/api/users
+router.get('/', async(req, res) => {
+    console.log(req.payload.usuarioId)
+    const usuario = await User.getById(usuarioId);
     res.json(usuario)
 })
 
@@ -58,6 +60,8 @@ router.post('/login', async(req, res) => {
         console.log(err);
     }
 });
+
+
 
 
 const createToken = (pUser) => {

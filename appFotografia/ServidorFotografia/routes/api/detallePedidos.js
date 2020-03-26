@@ -2,17 +2,10 @@ const router = require('express').Router();
 const Pedidos = require('../../models/detallePedido')
 
 
-/* router.get('/:id', async(req, res) => {
-    console.log(req.params)
-    const pedidos = await Pedidos.getAllPedidosUser(req.params['id']);
-    res.json(pedidos)
-});
- */
 
-
-router.get('/:idUser', async(req, res) => {
-    console.log(req.params)
-    const pedidos = await Pedidos.getAllDetallePedidos(req.params['idUser']);
+router.get('/', async(req, res) => {
+    console.log(req.payload.usuarioId)
+    const pedidos = await Pedidos.getAllDetallePedidos(req.payload.usuarioId);
     res.json(pedidos)
 });
 
