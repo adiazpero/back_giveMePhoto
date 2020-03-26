@@ -12,7 +12,6 @@ const checkToken = (req, res, next) => {
     } catch (err) {
         return console.log('user-token es incorrecto');
     }
-    console.log(payload)
 
 
     const fechaActual = moment().unix();
