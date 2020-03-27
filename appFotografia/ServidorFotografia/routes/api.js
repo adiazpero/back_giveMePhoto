@@ -4,7 +4,7 @@ const apiProductosRouter = require('./api/productos');
 const apiCursosRouter = require('./api/cursos');
 const apiDetallePedidosRouter = require('./api/detallePedidos');
 const apiPedidosRouter = require('./api/pedidos');
-const apiDetalleCursosRouter = require('./api/detalle.cursos');
+const apiDetalleCursosRouter = require('./api/detallecursos');
 
 
 
