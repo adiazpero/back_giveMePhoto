@@ -17,7 +17,7 @@ const getByMarca = (pMarca) => {
             }
             resolve(rows);
         })
-    }); 
+    });
 }
 
 //marca camaras y accesorios
@@ -139,7 +139,7 @@ const getByPrecio = (pPrecioMin, pPrecioMax) => {
 } */
 
 
-const getByTecnicas = (pTecnicas) => {
+/* const getByTecnicas = (pTecnicas) => {
     return new Promise((resolve, reject) => {
         let query = 'select * from productos where ';
         if (!Array.isArray(pTecnicas)) {
@@ -162,8 +162,33 @@ const getByTecnicas = (pTecnicas) => {
             resolve(rows);
         })
     })
-}
+} */
 
+const getByTecnicas = (pTecnicas, pPrecioMin, pPrecioMax) => {
+    return new Promise((resolve, reject) => {
+        let query = 'select * from productos where ';
+        if (!Array.isArray(pTecnicas)) {
+            query += pTecnicas + ' = 1'
+        } else {
+            for (const key in pTecnicas) {
+                if (key == pTecnicas.length - 1) {
+                    query += pTecnicas[key] + ' = 1'
+                } else {
+                    query += pTecnicas[key] + ' = 1 and ';
+                }
+            }
+        }
+        console.log(query)
+        db.query(`${query} and precio > ? and precio < ?`, [pPrecioMin, pPrecioMax], (err, rows) => {
+            if (err) reject(err);
+            if (rows.length === 0) {
+                resolve(null);
+            }
+            resolve(rows);
+        })
+    })
+}
+/* `${query} and precio > ? and precio < ?` */
 
 module.exports = {
     getByCategoria: getByCategoria,
