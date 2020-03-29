@@ -8,22 +8,16 @@ router.get('/', async (req, res) => {
     res.json(productos)
 })
 
-//Marcas cámaras y accesorios
+
+
 //GET http://localhost:3000/api/productos/marca/marca1 
-router.get('/marca/:marca', async (req, res) => {
-    const productos = await Producto.getByMarca(req.params['marca']);
+router.get('/marca/camaras/:marca', async (req, res) => {
+    const productos = await Producto.getByMarcaCamaras(req.params['marca']);
     res.json(productos)
 })
 
 
-//GET http://localhost:3000/api/productos/marcas/marca1/marca2 
-router.get('/marcas/:marca1/:marca2', async (req, res) => {
-    const productos = await Producto.getByMarcas(req.params['marca1'], req.params['marca2']);
-    res.json(productos)
-})
 
-
-//Marcas objetivos
 //GET http://localhost:3000/api/productos/marca/objetivos/marca1 
 router.get('/marca/objetivos/:marca', async (req, res) => {
     const productos = await Producto.getByMarcaObjetivos(req.params['marca']);
@@ -31,11 +25,13 @@ router.get('/marca/objetivos/:marca', async (req, res) => {
 })
 
 
-//GET http://localhost:3000/api/productos/marcas/objetivos/marca1/marca2 
-router.get('/marcas/objetivos/:marca1/:marca2', async (req, res) => {
-    const productos = await Producto.getByMarcasObjetivos(req.params['marca1'], req.params['marca2']);
+
+//GET http://localhost:3000/api/productos/marca/marca1 
+router.get('/marca/accesorios/:marca', async (req, res) => {
+    const productos = await Producto.getByMarcaAccesorios(req.params['marca']);
     res.json(productos)
 })
+
 
 
 //GET http://localhost:3000/api/productos/:categoria
@@ -43,6 +39,7 @@ router.get('/:categoria', async (req, res) => {
     const productos = await Producto.getByCategoria(req.params['categoria']);
     res.json(productos)
 })
+
 
 
 // GET http://localhost:3000/api/productos/resolucion/resolucionMin/resolucionMax
@@ -76,12 +73,6 @@ router.get('/precio/:precioMin/:precioMax', async (req, res) => {
 })
 
 
-
-/* //POST http://localhost:3000/api/productos/tecnicas 
-router.post('/tecnicas', async(req, res) => {
-    const productos = await Producto.getByTecnicas(req.body.tecnicas);
-    res.json(productos)
-}) */
 
 //POST http://localhost:3000/api/productos/tecnicas 
 router.post('/tecnicas', async (req, res) => {

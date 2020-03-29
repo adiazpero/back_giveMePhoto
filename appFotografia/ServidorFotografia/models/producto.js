@@ -7,10 +7,10 @@ const getAll = () => {
     });
 };
 
-//marca camara y accesorio
-const getByMarca = (pMarca) => {
+//marca camara 
+const getByMarcaCamaras = (pMarca) => {
     return new Promise((resolve, reject) => {
-        db.query('select * from productos where marca = ?', [pMarca], (err, rows) => {
+        db.query('select * from productos where marca = ? and categoria = "camaras"', [pMarca], (err, rows) => {
             if (err) reject(err);
             if (rows.length === 0) {
                 resolve(null);
@@ -20,19 +20,7 @@ const getByMarca = (pMarca) => {
     });
 }
 
-//marca camaras y accesorios
-const getByMarcas = (pMarca1, pMarca2) => {
-    return new Promise((resolve, reject) => {
-        //let query = "poner la query como un string";
-        db.query('select * from productos where marca in (?, ?)', [pMarca1, pMarca2], (err, rows) => {
-            if (err) reject(err);
-            if (rows.length === 0) {
-                resolve(null);
-            }
-            resolve(rows);
-        })
-    })
-}
+
 
 //marca por objetivos
 const getByMarcaObjetivos = (pMarca) => {
@@ -47,18 +35,17 @@ const getByMarcaObjetivos = (pMarca) => {
     });
 }
 
-//marcas por objetivos
-const getByMarcasObjetivos = (pMarca1, pMarca2) => {
+
+const getByMarcaAccesorios = (pMarca) => {
     return new Promise((resolve, reject) => {
-        //let query = "poner la query como un string";
-        db.query('select * from productos where marca in (?, ?) AND categoria = "objetivos"', [pMarca1, pMarca2], (err, rows) => {
+        db.query('select * from productos where marca = ? and categoria = "accesorios"', [pMarca], (err, rows) => {
             if (err) reject(err);
             if (rows.length === 0) {
                 resolve(null);
             }
             resolve(rows);
         })
-    })
+    });
 }
 
 const getByCategoria = (pCategoria) => {
@@ -198,9 +185,8 @@ module.exports = {
     getByIso: getByIso,
     getByPrecio: getByPrecio,
     getByTecnicas: getByTecnicas,
-    getByMarca: getByMarca,
-    getByMarcas: getByMarcas,
+    getByMarcaCamaras: getByMarcaCamaras,
     getByMarcaObjetivos: getByMarcaObjetivos,
-    getByMarcasObjetivos: getByMarcasObjetivos
+    getByMarcaAccesorios: getByMarcaAccesorios
 
 }
