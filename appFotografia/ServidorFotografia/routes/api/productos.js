@@ -60,6 +60,7 @@ router.get('/focal/:focalMin/:focalMax', async (req, res) => {
 
 // GET http://localhost:3000/api/productos/iso/isoMin/isoMax
 router.get('/iso/:isoMin/:isoMax', async (req, res) => {
+    console.log(req.params)
     const productos = await Producto.getByIso(req.params.isoMin, req.params.isoMax);
     res.json(productos)
 })
